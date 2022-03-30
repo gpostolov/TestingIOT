@@ -5,6 +5,10 @@ const httpPort = 8080
 
 var count = -1;
 
+app.get('/multiplicar', function(req, res) {
+   res.sendFile('multiplicar.html', { root: __dirname }); console.log('multiplicar');
+} )
+
 app.get('/reset', function(req, res) {
    count = 0;
    res.sendFile('reset.html', { root: __dirname }); console.log('reset');

@@ -1,9 +1,9 @@
 const {Builder, By, until, Key, Capabilities} = require('selenium-webdriver');
 const {expect} = require('chai');
 var firefox = require('selenium-webdriver/firefox');
-//var profilePath = '/home/tsiot/.mozilla/firefox/zoa6kvyg.default';
-var profilePath = '/home/tsiot/.mozilla/firefox/8297bw4u.default-release';
-let TIMEOUT=10000;
+//var profilePath = '/home/gabriel/.mozilla/firefox/zoa6kvyg.default';
+var profilePath = '/home/gabriel/.mozilla/firefox/0qxr4jxn.default-release';
+let TIMEOUT=30000;
 
 describe('test multi site with firefox', function() {
    let driver;
@@ -66,6 +66,20 @@ describe('test multi site with firefox', function() {
          expect(element.text).to.equal('Canario');  
       });
    });
+
+   it('check that the endpoint mult multiplies a by b', async function(){
+      this.timeout(30000);
+      await driver.get('https://sensor/multiplicar');
+      
+      await driver.findElement(By.id('a')).then(element => element.sendKeys('3'));
+      await driver.findElement(By.id('b')).then(element => element.sendKeys('4'));
+      await driver.findElement(By.id('send')).then(element => element.click());
+      driver.findElement(By.id('res')).then(element=>{
+         expect(element.text).to.equal('12');  
+      });
+
+   });
+
 
    after( () =>
       driver && driver.quit()
