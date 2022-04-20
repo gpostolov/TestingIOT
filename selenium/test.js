@@ -69,15 +69,13 @@ describe('test multi site with firefox', function() {
 
    it('check that the endpoint mult multiplies a by b', async function(){
       this.timeout(30000);
-      await driver.get('https://sensor/multiplicar');
+      await driver.get('https://sensor/multiplicar.html');
       
       await driver.findElement(By.id('a')).then(element => element.sendKeys('3'));
       await driver.findElement(By.id('b')).then(element => element.sendKeys('4'));
       await driver.findElement(By.id('send')).then(element => element.click());
-      driver.findElement(By.id('res')).then(element=>{
-         expect(element.text).to.equal('12');  
-      });
-
+      var my_res = await driver.wait(until.elementLocated(By.id('result')), 30000);
+      expect(my_res.text).to.equal('12');  
    });
 
 
