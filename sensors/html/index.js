@@ -55,3 +55,43 @@ app.get('/imagen.png', function(req, res) {
 
 app.listen(httpPort, () => console.log(`App listening on port ${httpPort}!`))
 
+app.get('/multiplicar.html', function(req, res) {
+	res.send(
+`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Page Multiplies</title>
+</head>
+<body>
+<form id="mult" method="POST" action="mult">
+<label for="a">a:</label><br>
+<input type="text" id="a" name="a"><br>
+<label for="b">b:</label><br>
+<input type="text" id="b" name="b"><br><br>
+<input type="submit" id="send">
+</form>
+</body>
+</html>`)
+;})
+
+app.post('/mult', function(req, res) {
+	var a = parseInt(req.body.a);
+	var b = parseInt(req.body.b);
+	var result = a*b;
+	res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Page Multiplies Post</title>
+</head>
+<body>
+<h1 id="res" name="res"></h1>
+<h1 id="result">${result}</h1>
+</body>
+</html>`);
+})
